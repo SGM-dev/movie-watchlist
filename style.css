@@ -7,5 +7,38 @@
 body {
   display: flex;
   align-items: center;
+  font-family: "Inter", sans-serif;
 }
 
+header {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(/public/header.png);
+  width: 100vw;
+  height: 20vh;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
+  width: 100%;
+}
+
+nav h1 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
