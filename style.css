@@ -11,10 +11,11 @@ body {
 }
 
 header {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(/public/header.png);
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url(/header.png);
   width: 100vw;
-  height: 20vh;
+  height: 40vh;
+  background-position: 10% 20%;
   margin: 0 auto;
   background-repeat: no-repeat;
   background-size: cover;
@@ -27,7 +28,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1em;
+  padding: 0 3em;
   width: 100%;
 }
 
