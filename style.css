@@ -8,6 +8,7 @@
 body {
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 header {
@@ -80,4 +81,32 @@ form button {
   font-style: normal;
   font-weight: 500;
   padding: 10px 15px;
+}
+
+main {
+  margin-top: 1.5em;
+  height: 100vh;
+  width: 100vw;
+}
+
+.initial-state {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.film-icon {
+  max-width: 70px;
+}
+
+.help-text {
+  color: #dfdddd;
+  text-align: center;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
 }
