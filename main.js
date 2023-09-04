@@ -3,19 +3,19 @@ const form = document.getElementById("search-form");
 const searchInput = document.getElementById("search-input");
 
 const apiKey = "98889bce";
-let moviesArray = [];
+let movieIDs;
 
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  getMovies(searchInput.value);
+  getMovieIds(searchInput.value);
 });
 
-async function getMovies(input) {
+async function getMovieIds(input) {
   const response = await fetch(
     `http://www.omdbapi.com/?apikey=${apiKey}&s=${input}`
   );
 
   const data = await response.json();
-  moviesArray = data.Search;
-  console.log(moviesArray)
+  movieIDs = data.Search.map((movie) => movie.imdbID);
+  console.log(movieIDs)
 }
