@@ -50,8 +50,7 @@ nav a {
 }
 
 form {
-  font-size: 14px;
-  font-style: normal;
+  font-size: 0.875rem;
   font-weight: 500;
   border-radius: 6px;
   border: 1px solid var(--gray-300, #d1d5db);
@@ -75,10 +74,8 @@ form button {
   border-radius: 0px 6px 6px 0px;
   border: 1px solid #d1d5db;
   background: #f9fafb;
-  height: 100%;
   color: #374151;
   font-size: 0.875rem;
-  font-style: normal;
   font-weight: 500;
   padding: 10px 15px;
 }
@@ -105,9 +102,7 @@ main {
 .help-text {
   color: #dfdddd;
   text-align: center;
-  font-family: Inter;
   font-size: 1rem;
-  font-style: normal;
   font-weight: 700;
 }
 
@@ -129,30 +124,60 @@ main {
   justify-content: space-evenly;
 }
 
+.movie-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.movie-header i {
+  font-size: 0.7rem;
+  color: #fec654;
+}
+
+.movie-header p {
+  color: #111827;
+
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.rating {
+  display: flex;
+  gap: 0.25em;
+  align-items: center;
+}
+
 .movie-title {
   color: #000;
-  text-align: justify;
-  font-family: Inter;
   font-size: 1.125rem;
-  font-style: normal;
   font-weight: 500;
 }
 
 .movie-subinfo {
+  padding: 1em 0;
   display: flex;
   color: #111827;
-  font-family: Inter;
-  font-size: 0.75rem;
-  font-style: normal;
+
+  font-size: 0.6rem;
   font-weight: 400;
-  gap: 1em;
+  gap: 1.2em;
 }
 
 .plot {
   color: #6b7280;
-  font-family: Inter;
   font-size: 0.875rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 1.25rem; /* 142.857% */
+}
+
+.add-to-watchlist {
+  border: none;
+  background: none;
+  color: #111827;
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+.add-to-watchlist i {
+  margin-right: 0.2em;
 }
