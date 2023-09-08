@@ -8,17 +8,17 @@ let imdbIDArray = [];
 
 searchBtn.addEventListener("click", getMovies);
 
-// async function getMovieIds(input) {
-//   const response = await fetch(
-//     `http://www.omdbapi.com/?apikey=${apiKey}&s=${input}`
-//   );
+async function getMovieIds(input) {
+  const response = await fetch(
+    `http://www.omdbapi.com/?apikey=${apiKey}&s=${input}`
+  );
 
-//   const data = await response.json();
-//   movieIDs = data.Search.map((movie) => movie.imdbID);
-//   getMovieDetails(movieIDs);
-// }
+  const data = await response.json();
+  movieIDs = data.Search.map((movie) => movie.imdbID);
+  renderMovieDetails(movieIDs);
+}
 
-// function getMovieDetails(arr) {
+// function renderMovieDetails(arr) {
 //   mainContainer.innerHTML = ``;
 
 //   arr.forEach(async (imdbID) => {
@@ -69,5 +69,40 @@ async function getMovies(e) {
         <h3 class="help-text">Movie not found</h3>
       </div>`;
   }
-  console.log(imdbIDArray);
+  renderMovieDetails(imdbIDArray);
+}
+
+function renderMovieDetails(idArray) {
+  idArray.forEach(async (id) => {
+    const response = await fetch(
+      `https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`
+    );
+    const data = await response.json();
+    if (data.Rated != "N/A" && data.Runtime != "N/A") {
+      mainContainer.innerHTML += `
+  <article class="search-result">
+  <img
+    alt="${data.Title} poster"
+    class="movie-poster"
+    src="${data.Poster}"
+  />
+  <div class="movie-info">
+    <div class="movie-header">
+      <h3 class="movie-title">${data.Title}</h3>
+    </div>
+    <div class="movie-subinfo">
+      <p class="runtime">${data.Runtime}</p>
+      <p class="genre">${data.Genre}</p>
+      <button class="add-to-watchlist">Watchlist</button>
+    </div>
+    <p class="plot">
+    ${data.Plot}
+    </p>
+  </div>
+</article>`;
+    }
+    imdbIDArray = [];
+  });
+  searchInput.value = "";
+  mainContainer.innerHTML = "";
 }
