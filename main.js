@@ -61,15 +61,16 @@ async function getMovies(e) {
   if (data.Search) {
     for (let i = 0; i < data.Search.length; i++) {
       imdbIDArray.push(data.Search[i].imdbID);
+      renderMovieDetails(imdbIDArray);
     }
   } else {
     mainContainer.innerHTML = `
       <div class="initial-state">
         <img alt="film-icon" src="/film.svg" class="film-icon" />
-        <h3 class="help-text">Movie not found</h3>
+        <h3 class="help-text">Unable to find what you’re looking for. Please try another search.</h3>
       </div>`;
   }
-  renderMovieDetails(imdbIDArray);
+
 }
 
 function renderMovieDetails(idArray) {
@@ -78,6 +79,7 @@ function renderMovieDetails(idArray) {
       `https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`
     );
     const data = await response.json();
+    console.log(data)
     if (data.Rated != "N/A" && data.Runtime != "N/A") {
       mainContainer.innerHTML += `
   <article class="search-result">
@@ -89,11 +91,17 @@ function renderMovieDetails(idArray) {
   <div class="movie-info">
     <div class="movie-header">
       <h3 class="movie-title">${data.Title}</h3>
+      <div class="rating">
+      <i class="fa-solid fa-star"></i>
+      <p>${data.imdbRating}</p>
+    </div>
     </div>
     <div class="movie-subinfo">
       <p class="runtime">${data.Runtime}</p>
       <p class="genre">${data.Genre}</p>
-      <button class="add-to-watchlist">Watchlist</button>
+      <button class="add-to-watchlist" data-imdbID=${data.imdbID}>
+      <i class="fa-solid fa-circle-plus"></i>Watchlist
+    </button>
     </div>
     <p class="plot">
     ${data.Plot}
