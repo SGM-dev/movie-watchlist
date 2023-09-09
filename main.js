@@ -18,38 +18,6 @@ async function getMovieIds(input) {
   renderMovieDetails(movieIDs);
 }
 
-// function renderMovieDetails(arr) {
-//   mainContainer.innerHTML = ``;
-
-//   arr.forEach(async (imdbID) => {
-//     const response = await fetch(
-//       `https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`
-//     );
-//     const data = await response.json();
-//     mainContainer.innerHTML += `
-//     <article class="search-result">
-//     <img
-//       alt="${data["Title"]} poster"
-//       class="movie-poster"
-//       src="${data["Poster"]}"
-//     />
-//     <div class="movie-info">
-//       <div class="movie-header">
-//         <h3 class="movie-title">${data["Title"]}</h3>
-//       </div>
-//       <div class="movie-subinfo">
-//         <p class="runtime">${data["Runtime"]}</p>
-//         <p class="genre">${data["Genre"]}</p>
-//         <button class="add-to-watchlist">Watchlist</button>
-//       </div>
-//       <p class="plot">
-//       ${data["Plot"]}
-//       </p>
-//     </div>
-//   </article>`;
-//   });
-// }
-
 async function getMovies(e) {
   e.preventDefault();
   const response = await fetch(
@@ -70,7 +38,6 @@ async function getMovies(e) {
         <h3 class="help-text">Unable to find what you’re looking for. Please try another search.</h3>
       </div>`;
   }
-
 }
 
 function renderMovieDetails(idArray) {
@@ -79,7 +46,6 @@ function renderMovieDetails(idArray) {
       `https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`
     );
     const data = await response.json();
-    console.log(data)
     if (data.Rated != "N/A" && data.Runtime != "N/A") {
       mainContainer.innerHTML += `
   <article class="search-result">
@@ -99,7 +65,7 @@ function renderMovieDetails(idArray) {
     <div class="movie-subinfo">
       <p class="runtime">${data.Runtime}</p>
       <p class="genre">${data.Genre}</p>
-      <button class="add-to-watchlist" data-imdbID=${data.imdbID}>
+      <button class="add-to-watchlist" data-imdbId=${data.imdbID}>
       <i class="fa-solid fa-circle-plus"></i>Watchlist
     </button>
     </div>
@@ -114,3 +80,18 @@ function renderMovieDetails(idArray) {
   searchInput.value = "";
   mainContainer.innerHTML = "";
 }
+
+const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+
+function addToWatchlist(id) {
+  if (!watchlist.includes(id)) {
+    watchlist.push(id);
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+  }
+}
+
+document.addEventListener("click", (e) => {
+  if(e.target.dataset.imdbid) {
+    addToWatchlist(e.target.dataset.imdbid)
+  }
+})
