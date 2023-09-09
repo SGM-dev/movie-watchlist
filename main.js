@@ -29,8 +29,8 @@ async function getMovies(e) {
   if (data.Search) {
     for (let i = 0; i < data.Search.length; i++) {
       imdbIDArray.push(data.Search[i].imdbID);
-      renderMovieDetails(imdbIDArray);
     }
+    renderMovieDetails(imdbIDArray);
   } else {
     mainContainer.innerHTML = `
       <div class="initial-state">
@@ -46,6 +46,7 @@ function renderMovieDetails(idArray) {
       `https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`
     );
     const data = await response.json();
+    imdbIDArray = [];
     if (data.Rated != "N/A" && data.Runtime != "N/A") {
       mainContainer.innerHTML += `
   <article class="search-result">
@@ -75,7 +76,6 @@ function renderMovieDetails(idArray) {
   </div>
 </article>`;
     }
-    imdbIDArray = [];
   });
   searchInput.value = "";
   mainContainer.innerHTML = "";
@@ -91,7 +91,7 @@ function addToWatchlist(id) {
 }
 
 document.addEventListener("click", (e) => {
-  if(e.target.dataset.imdbid) {
-    addToWatchlist(e.target.dataset.imdbid)
+  if (e.target.dataset.imdbid) {
+    addToWatchlist(e.target.dataset.imdbid);
   }
-})
+});
