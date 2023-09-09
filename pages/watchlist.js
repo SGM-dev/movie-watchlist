@@ -44,4 +44,17 @@ function renderWatchlist() {
   }
 }
 
+function removeFromWatchlist(id) {
+  let index = watchlist.indexOf(id);
+  watchlist.splice(index, 1);
+  localStorage.setItem("watchlist", JSON.stringify(watchlist));
+  location.reload();
+}
+
+document.addEventListener("click", (e) => {
+  if (e.target.dataset.imdbid) {
+    removeFromWatchlist(e.target.dataset.imdbid);
+  }
+});
+
 renderWatchlist();
